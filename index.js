@@ -1,6 +1,9 @@
 #! /usr/bin/env node
 import inquirer from "inquirer";
 import chalk from "chalk";
+console.log(chalk.bold.yellowBright(`\n   <<<====================================>>>`));
+console.log(chalk.bold.redBright(`<<<=======>>>  ${chalk.redBright.bold('CURRENCY CONVERTER')}  <<<=======>>>`));
+console.log(chalk.bold.yellowBright(`   <<<====================================>>>\n`));
 const Currency = {
     USD: 1, //base currency
     EUR: 0.91,
@@ -24,18 +27,18 @@ let answer = await inquirer.prompt([
     {
         name: "amount",
         type: "number",
-        message: "Enter your amount"
+        message: chalk.italic.bold("Enter your amount")
     }
 ]);
 let fromAmount = Currency[answer.From];
 let toAmount = Currency[answer.To];
 let amount = answer.amount;
 if (isNaN(amount) || amount <= 0) {
-    console.log(chalk.inverse("Please enter a valid positive numbers for amount!"));
+    console.log(chalk.inverse.italic("Please enter a valid positive numbers for amount!"));
 }
 let baseAmount = amount / fromAmount;
 let convertAmount = baseAmount * toAmount;
-console.log(chalk.magenta `Entered Amount ${amount}`);
-console.log(chalk.yellow `From Currency ${fromAmount}`);
-console.log(chalk.green `Converted Amount ${convertAmount.toFixed(2)}`);
-console.log(chalk.blue `To Currency ${toAmount}`);
+console.log(chalk.magentaBright.bold(`Entered Amount ${chalk.underline(amount)}`));
+console.log(chalk.yellowBright.bold(`From Currency ${chalk.underline(fromAmount)}`));
+console.log(chalk.greenBright.bold(`Converted Amount ${chalk.underline(convertAmount.toFixed(2))}`));
+console.log(chalk.blueBright.bold(`To Currency ${chalk.underline(toAmount)}`));
